@@ -1,5 +1,11 @@
 <h1>Cuisines</h1>
 
 #foreach($cuisine in $cuisines)
- <h3><a href="/cuisines/$cuisine.getId()">$cuisine.getName()</a></h3>
+ <h3><a href="/cuisines/$cuisine.getId()"> $cuisine.getName()</a></h3>
+ <h4><a href="/cuisines/$cuisine.getId()/edit"> Edit Cuisine</a> </h4>
 #end
+
+
+
+<hr>
+<a href="/">Return to Home Page</a>

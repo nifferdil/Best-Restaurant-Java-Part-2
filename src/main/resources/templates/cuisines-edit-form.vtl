@@ -1,0 +1,7 @@
+<h1> Edit cuisine name: $cuisine.getName() </h1>
+
+<form action="/cuisines/$cuisine.getId()" method="post">
+  <label for="name">Cuisine name</label>
+  <input id="name" name="name" type="text" value="$cuisine.getName()">
+  <button type="submit" class="btn btn-success">Update Cuisine</button>
+</form>

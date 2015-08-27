@@ -68,7 +68,7 @@ public class Restaurant {
 
   public void update(String restName) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE restaurants SET restName = :restName) WHERE id = :id";
+      String sql = "UPDATE restaurants SET restName = :restName WHERE id = :id";
       con.createQuery(sql)
         .addParameter("restName", restName)
         .addParameter("id", id)
