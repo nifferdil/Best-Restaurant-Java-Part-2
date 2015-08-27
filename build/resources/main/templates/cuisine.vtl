@@ -1,10 +1,10 @@
 <h3>Here are all the restaurants that serve this cuisine:</h3>
-
+<ul>
 #foreach ($restaurant in $cuisine.getRestaurants())
   #if($restaurant.getRestName())
-    <h4>$restaurant.getRestName()</h4> <a href="/restaurants/$restaurant.getId()/delete">Delete restaurant</a></li>
-                                              
+    <li><h4>$restaurant.getRestName()</h4><a href="/cuisines/$cuisine.getId()/$restaurant.getId()/delete">Delete restaurant</a></li>
   #end
+  </ul>
 #end
 
 <hr/>

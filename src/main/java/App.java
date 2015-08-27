@@ -46,6 +46,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       // Id parameter is key from the database when we use the save method
       Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
+      model.put("restaurants", Restaurant.all());
       model.put("cuisine", cuisine);
       model.put("template", "templates/cuisine.vtl");
       return new ModelAndView(model, layout);
@@ -93,11 +94,16 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/restaurants/:id/delete", (request, response) -> {
+    get("/cuisines/:id/:restaurantid/delete", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params("id")));
+      Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params("restaurantid")));
+      Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
+      String restName = request.queryParams("restName");
       restaurant.delete();
-      model.put("template", "templates/cuisines.vtl");
+      model.put("cuisine", cuisine);
+      model.put("cuisines", Cuisine.all());
+      model.put("restaurants", Restaurant.all());
+      model.put("template", "templates/cuisine.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -105,7 +111,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params("id")));
       cuisine.delete();
-      //after we delete we have to put our list back in
+      //after we delete we have to put our list back in, even it's empty
       model.put("cuisines", Cuisine.all());
       //choosing which page you want to end up at
       model.put("template", "templates/index.vtl");
